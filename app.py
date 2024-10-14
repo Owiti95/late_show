@@ -9,8 +9,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-@app.before_first_request
-def create_tables():
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
+
+with app.app_context():
     db.create_all()
 
 @app.route('/')
