@@ -6,6 +6,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shows.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
 @app.route('/')
 def index():
     return "Welcome to the late show!!"
